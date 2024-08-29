@@ -8,18 +8,20 @@
    (vx :initarg :vx
        :accessor vx)
    (vy :initarg :vy
-       :accessor vy)))
+       :accessor vy)
+   (a :initarg :a
+      :accessor a)))
 
 (defparameter *bola*
-  (make-instance 'Bola :x 400 :y 300 :vx 5 :vy 5))
+  (make-instance 'Bola :x 400 :y 300 :vx 7.5 :vy 7.5 :a 45))
 
 (defmethod setPos ((b Bola) x y)
   (setf (x b) x)
   (setf (y b) y))
 
 (defmethod atualiza-bola ((b Bola))
-  (setf (x b) (+ (x b) (vx b)))
-  (setf (y b) (+ (y b) (vy b)))
+  (setf (x b) (+ (x b) (converte-velocidade-x (vx b) (a b))))
+  (setf (y b) (+ (y b) (converte-velocidade-y (vy b) (a b))))
 
                                         ; bate na parede *precisa atualizar componente x*
   (if (or (<= (x b) 7.5)
@@ -32,4 +34,4 @@
       (setf (vy b) (* -1 (vy b)))))
 
 (defun desenha-bola ()
-  (draw-circle (x *bola*) (y *bola*) 7.5 :green))
+  (draw-circle (truncate (x *bola*)) (truncate (y *bola*)) 7.5 :green))

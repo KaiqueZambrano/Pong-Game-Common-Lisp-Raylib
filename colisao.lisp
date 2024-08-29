@@ -1,7 +1,13 @@
 (in-package :pong-game)
 
-(defun ajuste ()
-  (* -1 (get-random-value 0 1)))
+(defun graus-para-radianos (graus)
+  (* graus (/ pi 180)))
+
+(defun converte-velocidade-x (v a)
+  (* v (cos (graus-para-radianos a))))
+
+(defun converte-velocidade-y (v a)
+  (* v (sin (graus-para-radianos a))))
 
 (defmethod detecta-colisao ((b Bola) (j Jogador))
   (and (> (+ (x b) 7.5) (x j))
@@ -12,13 +18,11 @@
 (defmethod resolve-colisao ((b Bola) (j Jogador))
   (when (and (> (+ (x b) 7.5) (x j))
              (< (- (x b) 7.5) (+ (x j) 100)))
-    (setf (vy b) (* -1 (vy b)))
-    (setf (vx b) (+ (vx b) (ajuste))))
-  
+    (setf (vy b) (* -1 (vy b))))
+
   (when (and (> (+ (y b) 7.5) (y j))
              (< (- (y b) 7.5) (+ (y j) 15)))
-    (setf (vx b) (* -1 (vx b)))
-    (setf (vy b) (+ (vy b) (ajuste)))))
+    (setf (vx b) (* -1 (vx b)))))
 
 (defun colisao ()
   (when (detecta-colisao *bola* *jogador1*)
