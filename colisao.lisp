@@ -3,6 +3,12 @@
 (defun random-adjustment ()
   (* -1 (get-random-value 0 1)))
 
+(defmethod detecta-colisao ((b Bola) (j Jogador))
+  (and (> (+ (x b) 7.5) (x j))
+       (< (- (x b) 7.5) (+ (x j) 100))
+       (> (+ (y b) 7.5) (y j))
+       (< (- (y b) 7.5) (+ (y j) 15))))
+
 (defmethod resolve-colisao ((b Bola) (j Jogador))
   (when (and (> (+ (x b) 7.5) (x j))
              (< (- (x b) 7.5) (+ (x j) 100)))
