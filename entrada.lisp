@@ -5,13 +5,13 @@
         (x2 (x *jogador2*)))
                                         ; movimento jogador 1
     (cond
-     ((is-key-down :key-left) (set-jogador-x *jogador1* (- x1 10)))
-     ((is-key-down :key-right) (set-jogador-x *jogador1* (+ x1 10))))
+     ((is-key-down :key-left) (set-jogador-x *jogador1* (- x1 20)))
+     ((is-key-down :key-right) (set-jogador-x *jogador1* (+ x1 20))))
 
                                         ; movimento jogador 2
     (cond
-     ((is-key-down :key-a) (set-jogador-x *jogador2* (- x2 10)))
-     ((is-key-down :key-d) (set-jogador-x *jogador2* (+ x2 10))))
+     ((is-key-down :key-a) (set-jogador-x *jogador2* (- x2 20)))
+     ((is-key-down :key-d) (set-jogador-x *jogador2* (+ x2 20))))
 
                                         ; colisão paredes
     (cond
