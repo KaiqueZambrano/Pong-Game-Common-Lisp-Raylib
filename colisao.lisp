@@ -10,10 +10,9 @@
   (* v (sin (graus-para-radianos a))))
 
 (defmethod detecta-colisao ((b Bola) (j Jogador))
-  (and (> (+ (x b) 7.5) (x j))
-       (< (- (x b) 7.5) (+ (x j) 100))
-       (> (+ (y b) 7.5) (y j))
-       (< (- (y b) 7.5) (+ (y j) 15))))
+  (let ((rec1 (make-rectangle :x (truncate (x b)) :y (truncate (y b)) :width 100 :height 15))
+        (rec2 (make-rectangle :x (truncate (x j)) :y (truncate (y j)) :width 100 :height 15)))
+    (check-collision-recs rec1 rec2)))
 
 (defmethod resolve-colisao ((b Bola) (j Jogador))
   (when (and (> (+ (x b) 7.5) (x j))
@@ -27,6 +26,6 @@
 (defun colisao ()
   (when (detecta-colisao *bola* *jogador1*)
     (resolve-colisao *bola* *jogador1*))
-
+  
   (when (detecta-colisao *bola* *jogador2*)
     (resolve-colisao *bola* *jogador2*)))
