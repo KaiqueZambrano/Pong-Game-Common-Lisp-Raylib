@@ -18,6 +18,7 @@
                  (set-target-fps target-fps)
                  (loop until (window-should-close)
                        do (with-drawing (clear-background :raywhite)
+                                        (atualiza-bola *bola*)
                                         (desenha-jogadores)
                                         (desenha-bola)
                                         (entrada))))))
