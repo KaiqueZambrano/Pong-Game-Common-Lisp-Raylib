@@ -1,9 +1,10 @@
 (ql:quickload "cl-raylib")
 
 (defpackage :pong-game
-  (:use :cl :cl-raylib))
+            (:use :cl :cl-raylib))
 
 (load "jogadores.lisp")
+(load "bola.lisp")
 (load "entrada.lisp")
 
 (in-package :pong-game)
@@ -14,10 +15,10 @@
         (target-fps 20)
         (title "PONG-GAME"))
     (with-window (screen-width screen-height title)
-      (set-target-fps target-fps)
-      (loop until (window-should-close)
-            do (with-drawing 
-                 (clear-background :raywhite)
-                 (desenha-jogadores)
-                 (entrada))))))
+                 (set-target-fps target-fps)
+                 (loop until (window-should-close)
+                       do (with-drawing (clear-background :raywhite)
+                                        (desenha-jogadores)
+                                        (desenha-bola)
+                                        (entrada))))))
 (main)
