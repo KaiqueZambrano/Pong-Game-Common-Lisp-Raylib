@@ -1,9 +1,20 @@
 (in-package :pong-game)
 
-(defstruct jogador x y)
-(setq j1 (make-jogador :x 400 :y 30))
-(setq j2 (make-jogador :x 400 :y 550))
+(defclass Jogador ()
+  ((x :initarg :x
+      :accessor x)
+   (y :initarg :y
+      :accessor y)))
+
+(defparameter *jogador1*
+              (make-instance 'Jogador :x 400 :y 30))
+
+(defparameter *jogador2*
+              (make-instance 'Jogador :x 400 :y 550))
+
+(defmethod set-jogador-x ((j Jogador) x)
+           (setf (x j) x))
 
 (defun desenha-jogadores ()
-  (draw-rectangle (jogador-x j1) (jogador-y j1) 100 15 :red)
-  (draw-rectangle (jogador-x j2) (jogador-y j2) 100 15 :black))
+  (draw-rectangle (x *jogador1*) (y *jogador1*) 100 15 :red)
+  (draw-rectangle (x *jogador2*) (y *jogador2*) 100 15 :black))

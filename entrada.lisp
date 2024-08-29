@@ -1,25 +1,23 @@
 (in-package :pong-game)
 
 (defun entrada ()
-  (let ((x1 (jogador-x j1))
-        (x2 (jogador-x j2)))
-    (if (is-key-down :key-left)
-      (setf (jogador-x j1) (- x1 10)))
-    (if (is-key-down :key-right)
-      (setf (jogador-x j1) (+ x1 10)))
-    (if (is-key-down :key-a) 
-      (setf (jogador-x j2) (- x2 10)))
-    (if (is-key-down :key-d)
-      (setf (jogador-x j2) (+ x2 10))))
-  
-  (let ((x1 (jogador-x j1))
-        (x2 (jogador-x j2)))
-    (if (>= x1 700)
-      (setf (jogador-x j1) 700))
-    (if (<= x1 0)
-      (setf (jogador-x j1) 0))
-    (if (>= x2 700)
-      (setf (jogador-x j2) 700))
-    (if (<= x2 0)
-      (setf (jogador-x j2) 0))))
+  (let ((x1 (x *jogador1*))
+        (x2 (x *jogador2*)))
 
+    ; movimento jogador 1
+    (cond
+      ((is-key-down :key-left) (set-jogador-x *jogador1* (- x1 10)))
+      ((is-key-down :key-right) (set-jogador-x *jogador1* (+ x1 10))))
+
+    ; movimento jogador 2
+    (cond
+      ((is-key-down :key-a) (set-jogador-x *jogador2* (- x2 10)))
+      ((is-key-down :key-d) (set-jogador-x *jogador2* (+ x2 10))))
+
+    ; colisão paredes
+    (cond
+      ((>= x1 700) (set-jogador-x *jogador1* 650))
+      ((<= x1 0) (set-jogador-x *jogador1* 50))
+      ((>= x2 700) (set-jogador-x *jogador2* 650))
+      ((<= x2 0) (set-jogador-x *jogador2* 50)))))
+    
