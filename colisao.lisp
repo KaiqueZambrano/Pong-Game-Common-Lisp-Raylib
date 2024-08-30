@@ -23,9 +23,15 @@
              (< (- (y b) 7.5) (+ (y j) 15)))
     (setf (vx b) (* -1 (vx b)))))
 
+(defmethod pontuacao ((b Bola))
+  (cond ((>= (y b) 590) (pontuar *jogador1*))
+        ((<= (y b) 10) (pontuar *jogador2*))))
+
 (defun colisao ()
   (when (detecta-colisao *bola* *jogador1*)
     (resolve-colisao *bola* *jogador1*))
   
   (when (detecta-colisao *bola* *jogador2*)
     (resolve-colisao *bola* *jogador2*)))
+
+

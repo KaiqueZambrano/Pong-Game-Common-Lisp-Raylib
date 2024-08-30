@@ -13,7 +13,7 @@
       :accessor a)))
 
 (defparameter *bola*
-  (make-instance 'Bola :x 400 :y 300 :vx 7.5 :vy 7.5 :a 45))
+  (make-instance 'Bola :x 400 :y 300 :vx 12 :vy 12 :a 45))
 
 (defmethod setPos ((b Bola) x y)
   (setf (x b) x)
